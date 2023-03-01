@@ -1,16 +1,14 @@
 import os
 import time
-from flask import Flask, request, redirect, flash, url_for, render_template
-from flask_wtf import FlaskForm
-from wtforms import FileField
+from flask import Flask, request, render_template
 from flask_uploads import configure_uploads, IMAGES, UploadSet
 import telegram
-from telegram import Update, Bot
+from telegram import Bot
 from telegram.ext import Updater, MessageHandler, Filters
 from telegram.utils.request import Request
 import paho.mqtt.client as mqtt
 import cv2
-from simple_facerec import SimpleFacerec
+from Python.simple_facerec import SimpleFacerec
 import threading
 
 BOT_TOKEN = " "
@@ -30,7 +28,7 @@ flag = False
 
 def face_recognition(path):
    sfr = SimpleFacerec()
-   sfr.load_encoding_images("/home/christ-infotech-007/Rohan/ArduCam_FlaskWebServer/FlaskServer/images/")
+   sfr.load_encoding_images("/home/christ-infotech-007/Rohan/ArduCam_FlaskWebServer/Python/images/")
    # Load Camera
    cap = cv2.imread(path)
    return sfr.detect_known_faces(cap)
@@ -50,8 +48,8 @@ def func():
    while True:
        time.sleep(0.1)
        if flag == True:
-           # filepath = "/home/christ-infotech-007/Rohan/ArduCam_FlaskWebServer/FlaskServer/static/img/Rohan Harchandani.jpeg"
-           filepath = "/home/christ-infotech-007/Rohan/ArduCam_FlaskWebServer/FlaskServer/static/img/capture01.jpeg"
+           # filepath = "/home/christ-infotech-007/Rohan/ArduCam_FlaskWebServer/Python/static/img/Rohan Harchandani.jpeg"
+           filepath = "/home/christ-infotech-007/Rohan/ArduCam_FlaskWebServer/Python/static/img/capture01.jpeg"
            message = "Someone is at the door"
            link = "http://192.168.0.107:1066/" + filepath
 
@@ -93,7 +91,7 @@ def upload():
    :return:
    """
    if request.method == 'POST' and 'image/jpeg' == request.content_type:
-       filepath = "/home/christ-infotech-007/Rohan/ArduCam_FlaskWebServer/FlaskServer/static/img/capture%02d.jpeg" % count
+       filepath = "/home/christ-infotech-007/Rohan/ArduCam_FlaskWebServer/Python/static/img/capture%02d.jpeg" % count
        f = open(filepath, "wb")
        # count = count + 1
        f.write(bytes(request.data))
