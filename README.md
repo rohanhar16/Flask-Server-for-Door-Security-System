@@ -53,10 +53,15 @@
 
 <h2>Code Explaination</h2>
 <ol>
-  <li>Pyhton code</li>
-    <p>Python script that uses Flask web framework and OpenCV for face recognition. It also uses Telegram Bot API and MQTT protocol for communication. The script starts a web server that accepts image uploads and performs face recognition on them. If a face is detected, the script sends a message to a Telegram chat with the person's name. Additionally, the script sends a message over MQTT to a subscribed client. The script also has a message handler for Telegram messages and a function for running the face recognition process in a separate thread.</p>
-  <li>Arduino code</li>
-    <p>This code captures an image using an ArduCAM OV2640 camera and sends it to an HTTP server using an Ethernet shield. The captured image is stored in a buffer called img_buf and the function http_postData is responsible for sending the data to the server via HTTP POST. The server address is defined in the server variable and the port in the port variable. The function ethernet_transfer is a helper function used by http_postData to send the image data in chunks of 1024 bytes. The HTTP POST request includes a header specifying the size and type of the image being sent. The code includes a button connected to pin 6 and a buzzer connected to pin 8, but these are not used in the image capture and transfer process.</p>
+<p>This code is for creating a Flask web server that can receive a JPEG image file through POST request, perform face recognition using the SimpleFacerec library, and send a notification to a Telegram bot with the result. The code also uses MQTT protocol to publish and subscribe to topics for home automation purposes.
+The necessary libraries are imported [1-14]. Then, an instance of the Flask class is created with the name app [19]. The photos variable is defined as an instance of UploadSet that accepts image files. The path for uploaded images is set to "static/img". The configure_uploads function is called with the app instance and photos to configure the upload directory [21-24].
+
+The face_recognition() function loads pre-encoded images of known faces from a specified directory using the SimpleFacerec library. Then it reads the specified image file and performs face recognition on the image using the loaded encoding images. The function returns the location and names of the detected faces.[31-36]
+The func() function is continuously running in a separate thread, waiting for the flag variable to be set to True. Once the flag is True, the function reads the image file from the specified directory, performs face recognition using the face_recognition() function, sends a notification to the Telegram bot with the result, and sets the flag back to False. [48-77]
+The mesaage_handler() function is the handler for incoming messages from the Telegram bot. It subscribes to a specified topic using MQTT protocol and publishes a message with the received text to the topic.[39-45]
+Finally, the main function of the code is the upload() function, which is the handler for the POST request. The function first checks if the content type of the request is image/jpeg, then saves the received image file to the specified directory. After saving the file, it sets the flag variable to True, indicating that a new image has been received and it's time to perform face recognition.[81-109]
+Finally, the code sets up a Flask app, configures file uploads, and starts the Flask app with the app.run() method. It also starts a separate thread for the func() function and starts the Telegram bot with the main() function.
+The if _name_ == '_main_': block starts the Flask application on 0.0.0.0 on port 1066 [124-128] and starts the func() as a separate thread. [125-126]</p>
 </ol>
 
 <h2>Additional Notes</h2>
