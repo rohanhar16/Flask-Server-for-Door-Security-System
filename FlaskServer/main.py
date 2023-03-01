@@ -21,7 +21,7 @@ from simple_facerec import SimpleFacerec
 from multiprocessing import Process, Queue
 import threading
 
-BOT_TOKEN = "6134190069:AAHhWMTRRG9OH9P-R9EVQlQuW7luBtTcW0o"
+BOT_TOKEN = " "
 bot = telegram.Bot(BOT_TOKEN)
 
 app = Flask(__name__)
