@@ -15,8 +15,30 @@
 </ul>
 
 <h2>Circuit Diagram</h2>
-<img src="Files/arducam-pin_ZYPgtae050.jpg" alt="Circuit diagram" title="Optional title" >
+<h3> How to configure SPI for ArduCam Mini 2MP Plus - SPI Camera Module on W5100S-EVB-Pico board</h3>
 
+**WIZnet W5100S-EVB-Pico**
+
+<img style="width:50rem" src="Files/W5100S-EVB-Pico-Pinout.png" alt="W5100S-EVB-Pico">
+
+The WIZnet W5100S-EVB-Pico board uses default SPI0 for the internal ethernet chip W5100S. It uses GPIO pin 21-22 and 24-27.<p>
+The ArduCam provides <a href="https://www.arducam.com/docs/pico/arducam-camera-module-for-raspberry-pi-pico/spi-camera-for-raspberry-pi-pico/">a document and source codes "SPI Camera for Raspberry Pi Pico"</a> and it also uses SPI0. To avoid the confliction, this project uses SPI1 for the ArduCam OV2640 Module.
+
+
+**ArduCam Mini 2MP Plus - SPI Camera Module - Pin Definition**
+
+<img style="width:50rem" src="Files/AruduCam-Mini-2MP-Plus-SPI-Camera-Module-Pin.jpg" alt="AruduCam-Mini-2MP-Plus-SPI-Camera-Module">
+
+ArduCam OV2640 Module requires CS, MOSI, MISO, SCLK pins for SPI connection, and SDA, SCL pins for I2C connection. This project modified the source code of ArduCam to use SPI1.
+
+**Pico pin configuration for ArduCam OV2640**
+
+1. CS --> GPIO 13
+2. MOSI --> GPIO 11
+3. MISO --> GPIO 12
+4. SCLK --> GPIO 10
+5. SDA --> GPIO 8
+6. SCL --> GPIO 9
 <h2>Getting Started</h2>
 <ol>
 	<li>Clone this repository.</li>
