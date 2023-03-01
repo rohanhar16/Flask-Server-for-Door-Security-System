@@ -2,6 +2,9 @@
 	<h1>Flask Server for Door Security System</h1>
 	<img src="Files/CameraModule_Pico.jpeg" alt="Prototype" title="Optional title" >
 <p>This is a Flask web server that interfaces with an ArduCam camera module and performs facial recognition on captured images. The server is integrated with Telegram, MQTT, and OpenCV libraries for image processing and messaging capabilities. Once the door bell has been pressed, notification has been sent to telegram bot of the user “Someone is at the door” then camera module captures the snapshot, which has been sent to program which is used to recognised the face of the visitor, and then the snapshot of the visitor and the name of visitor (if it’s image is in database) will be sent to user’s telegram bot.</p>
+
+<h2>Flow of working of the project</h2>
+<img style="width:50rem" src="Files/Flow chart.drawio.png" alt = "Flow of the project">
   <h2>Dependencies</h2>
 <ul>
 	<li>Python 3.7+</li>
